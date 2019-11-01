@@ -1,56 +1,38 @@
-import React, { Component } from 'react';
-import '../App.css';
+import React, {Component} from 'react'
+import '../App.css'
 import Nav from './Nav'
-import hogs from '../porkers_data';
+import hogs from '../porkers_data'
 import HogContainer from './HogContainer'
 
 class App extends Component {
 
   state = {
-    filtered: false,
-    sortName: false,
-    sortWeight: false
-
+    filtered: false
   }
 
   filterGreased = () => {
     this.setState({
-      filtered: !this.state.filtered,
-      sortName: !this.state.sortName,
-      sortWeight: !this.state.sortWeight
+      filtered: !this.state.filtered
     }) 
   }
 
   handleFilter = (hogs) => {
     return this.state.filtered ? 
-      hogs.filter(hog => hog.greased === true) :
+      hogs.filter(hog => hog.greased) :
          hogs
-  }
-
-  sortByName = (hogs) => {
-    return this.state.sortName ? 
-      hogs.sort((a, b) => (a.name.localeCompare(b.name))) :
-         hogs
-  }
-
-  sortByWeight = () => {
-    console.log(hogs.sort((a, b) => (a.weight - b.weight)))
   }
 
   render() {
     return (
       <div className="App">
-          <Nav 
-            filter={this.filterGreased} 
-            sortByName={this.sortByName} 
-            sortByWeight={this.sortByWeight}
-          />
-          <HogContainer hogs={this.handleFilter(hogs)}/>
+        <Nav 
+          filter={this.filterGreased} 
+          filtered={this.state.filtered}
+        />
+        <HogContainer hogs={this.handleFilter(hogs)}/>
       </div>
     )
   }
 }
 
-export default App;
-
-
+export default App

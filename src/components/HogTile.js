@@ -10,18 +10,18 @@ class HogTile extends React.Component {
   handleClick = (event) => {
     this.setState({
       ...this.state,
-      specialty: this.props.specialty,
-      greased: this.props.greased,
       weight: this.props.weight,
-      medal: this.props.medal
+      specialty: this.props.specialty,
+      medal: this.props.medal,
+      greased: this.props.greased
     })
   }
 
   render() {
     return (
       <div onClick={this.handleClick}>
-        <h1>{this.props.name}</h1>
-        <img src={this.state.image} alt={this.state.name}></img>
+        <h1>{this.state.name}</h1>
+        <img src={this.state.image} alt={this.state.name}/>
         {this.state.weight ? <p>Weight: {this.state.weight}</p> : null}
         {this.state.specialty ? <p>Specialty: {this.state.specialty}</p> : null}
         {this.state.medal ? <p>Highest Medal Achieved: {this.state.medal}</p> : null}

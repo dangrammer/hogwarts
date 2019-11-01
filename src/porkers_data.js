@@ -118,6 +118,6 @@ const hogs = [
     image: augustusGloop,
     'highest medal achieved': 'wood'
   }
-];
+]
 
-export default hogs;
+export default hogs
