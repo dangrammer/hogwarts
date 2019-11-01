@@ -4,18 +4,12 @@ import HogTile from './HogTile'
 class HogContainer extends React.Component {
 
   state = {
-    sortBasis: null
+    sortBasis: 'name'
   }
 
-  sortName = () => {
+  sortBy = (event) => {
     this.setState({
-      sortBasis: 'name'
-    }) 
-  }
-
-  sortWeight = () => {
-    this.setState({
-      sortBasis: 'weight'
+      sortBasis: event.target.value
     }) 
   }
 
@@ -24,9 +18,9 @@ class HogContainer extends React.Component {
     let basis = this.state.sortBasis
 
     if (basis === 'name') {
-      return hogs.sort((a, b) => (a.name.localeCompare(b.name)))
+      return [...hogs].sort((a, b) => a.name.localeCompare(b.name))
     } else if (basis === 'weight') {
-      return hogs.sort((a, b) => (a.weight - b.weight))
+      return [...hogs].sort((a, b) => a.weight - b.weight)
     } else {
       return hogs
     }
@@ -36,9 +30,18 @@ class HogContainer extends React.Component {
     return (
       <div>
         <div className="sort-buttons">
-      <button onClick={this.sortName}>Sort by Name</button>
-			<button onClick={this.sortWeight}>Sort by Weight</button>
-      </div>
+          <input 
+            type="radio" 
+            value="name" 
+            checked={this.state.sortBasis === 'name'} 
+            onChange={this.sortBy}/> Sort by Name         
+          <br/>
+          <input 
+            type="radio" 
+            value="weight"
+            checked={this.state.sortBasis === 'weight'} 
+            onChange={this.sortBy}/> Sort by Weight
+        </div>
       <ul className="ui grid container">
         {this.hogsArr().map(hog =>
           <li className="ui eight wide column" key={hog.name}>
